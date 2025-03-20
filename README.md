@@ -196,20 +196,20 @@ Your first task is to build a hand of 10 letters for the user. To do so, impleme
 #### Distribution of Letters
 
 | Letter : Qty. | Letter : Qty. |
-|:------:|:-----:|
-| A : 9  | N : 6 |
-| B : 2  | O : 8 |
-| C : 2  | P : 2 |
-| D : 4  | Q : 1 |
-| E : 12 | R : 6 |
-| F : 2  | S : 4 |
-| G : 3  | T : 6 |
-| H : 2  | U : 4 |
-| I : 9  | V : 2 |
-| J : 1  | W : 2 |
-| K : 1  | X : 1 |
-| L : 4  | Y : 2 |
-| M : 2  | Z : 1 |
+| :-----------: | :-----------: |
+|     A : 9     |     N : 6     |
+|     B : 2     |     O : 8     |
+|     C : 2     |     P : 2     |
+|     D : 4     |     Q : 1     |
+|    E : 12     |     R : 6     |
+|     F : 2     |     S : 4     |
+|     G : 3     |     T : 6     |
+|     H : 2     |     U : 4     |
+|     I : 9     |     V : 2     |
+|     J : 1     |     W : 2     |
+|     K : 1     |     X : 1     |
+|     L : 4     |     Y : 2     |
+|     M : 2     |     Z : 1     |
 
 **Note:** Making sure that the drawn letters match the rules of the letter pool can be straightforward or very difficult, depending on how you build the data structure for the letter pool. It is worth spending some time to think carefully about this.
 
@@ -241,15 +241,15 @@ Implement the function `score_word` in `game.py`. This method should have the fo
 
 #### Score chart
 
-|Letter                        | Value|
-|:----------------------------:|:----:|
-|A, E, I, O, U, L, N, R, S, T  |   1  |
-|D, G                          |   2  |
-|B, C, M, P                    |   3  |
-|F, H, V, W, Y                 |   4  |
-|K                             |   5  |
-|J, X                          |   8  |
-|Q, Z                          |   10 |
+|            Letter            | Value |
+| :--------------------------: | :---: |
+| A, E, I, O, U, L, N, R, S, T |   1   |
+|             D, G             |   2   |
+|          B, C, M, P          |   3   |
+|        F, H, V, W, Y         |   4   |
+|              K               |   5   |
+|             J, X             |   8   |
+|             Q, Z             |  10   |
 
 ### Wave 4: get_highest_word_score
 
