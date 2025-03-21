@@ -3,7 +3,7 @@ def display_welcome_message():
 
 def display_drawn_letters(letters):
     print("You have drawn the letters:")
-    print(', '.join(letters))
+    print(''.join(letters))
 
 def display_game_instructions():
     print("Please input your submission for the longest anagram you can come up with")
