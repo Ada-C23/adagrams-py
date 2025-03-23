@@ -64,6 +64,7 @@ def test_letter_not_selected_too_many_times():
         
         # Assert
         for letter in letters:
+            print("**** DEBUG PRINT STATEMENT ******", letter, letter_freq[letter], LETTER_POOL[letter], letter_freq[letter] <= LETTER_POOL[letter])
             assert letter_freq[letter] <= LETTER_POOL[letter]
 
 def test_draw_letters_returns_different_hands():
