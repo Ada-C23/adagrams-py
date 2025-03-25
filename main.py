@@ -102,3 +102,5 @@ if __name__ == "__main__":
     else:
         wave = "ERROR"
     main(wave)
+
+main(wave_1_run_game)
