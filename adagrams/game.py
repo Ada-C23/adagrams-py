@@ -1,6 +1,7 @@
 from random import randint
 import random
 from collections import Counter
+from typing import Optional
 
 LETTER_POOL = {
     'A': 9, 
@@ -31,8 +32,6 @@ LETTER_POOL = {
     'Z': 1
 }
 
-LETTERS_LIST = ['A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'B', 'B', 'C', 'C', 'D', 'D', 'D', 'D', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'F', 'F', 'G', 'G', 'G', 'H', 'H', 'I', 'I', 'I', 'I', 'I', 'I', 'I', 'I', 'I', 'J', 'K', 'L', 'L', 'L', 'L', 'M', 'M', 'N', 'N', 'N', 'N', 'N', 'N', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'P', 'P', 'Q', 'R', 'R', 'R', 'R', 'R', 'R', 'S', 'S', 'S', 'S', 'T', 'T', 'T', 'T', 'T', 'T', 'U', 'U', 'U', 'U', 'V', 'V', 'W', 'W', 'X', 'Y', 'Y', 'Z']
-
 LETTERS_SCORE = {
     'A': 1, 'E': 1, 'I': 1, 'O': 1, 'U': 1, 'L': 1, 'N': 1, 'R': 1, 'S': 1, 'T': 1,
     'D': 2, 'G': 2,
@@ -43,6 +42,14 @@ LETTERS_SCORE = {
     'Q': 10, 'Z': 10
 }
 
+LETTERS_LIST = [
+    'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'B', 'B', 'C', 'C', 'D', 'D', 'D', 'D', 'E', 'E', 
+    'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'F', 'F', 'G', 'G', 'G', 'H', 'H', 'I', 'I', 'I', 'I', 'I',
+    'I', 'I', 'I', 'I', 'J', 'K', 'L', 'L', 'L', 'L', 'M', 'M', 'N', 'N', 'N', 'N', 'N', 'N', 'O', 'O', 'O', 'O', 
+    'O', 'O', 'O', 'O', 'P', 'P', 'Q', 'R', 'R', 'R', 'R', 'R', 'R', 'S', 'S', 'S', 'S', 'T', 'T', 'T', 'T', 'T',
+    'T', 'U', 'U', 'U', 'U', 'V', 'V', 'W', 'W', 'X', 'Y', 'Y', 'Z'
+]
+
 def draw_letters():
     
     tiles = []
@@ -51,20 +58,11 @@ def draw_letters():
         letter = LETTERS_LIST[random_integer]
         if tiles.count(letter) == LETTER_POOL[letter]:
             break
-        #tiles.append(LETTERS_LIST[random_integer])
         tiles.append(letter)
-    return tiles
-
-    
+    return tiles  
 
 def uses_available_letters(word, letter_bank):
-    # for number in range(len(word)):
-    #     for letter in word:
-    #         if letter_bank.count(letter) >= word.count(letter):
-    #             continue
-    #         elif letter not in letter_bank or letter_bank.count(letter) < word.count(letter):
-    #             return False
-    #         return True   
+
     word = word.upper()
     word_counts = Counter(word)
     letter_bank_counts = Counter(letter_bank)
@@ -86,29 +84,24 @@ def score_word(word):
     return score
 
 def get_highest_word_score(word_list):
-    word_score =[]
-    word_score_compare = []
-    for i in range(0,len(word_list)):
-        if i == 0:
-            word = word_list[i]
-            score = score_word(word)
-            word_score.extend([word, score])
+    if not word_list:
+        return None
+    
+    best_word = word_list[0]
+    best_score = score_word(word_list[0])
+
+    for i in range(1, len(word_list)):
         word = word_list[i]
         score = score_word(word)
-        if len(word_list[i]) == 10:
-            word = word_list[i]
-            score = score_word(word)
-            word_score[0] = word
-            word_score[1] = score
-            return word_score
-        elif score == int(word_score[1]):
-            if len(word) < len(word_score[0]):
-                word_score[0] = word        
-        else:
-            if score > int(word_score[1]):
-                word_score[0] = word
-                word_score[1] = score
-                word_score.extend([word, score])
-    return word_score
 
+        if score > best_score:
+            best_score = score
+            best_word = word
+        elif score == best_score:
+            if len(word) < len(best_word) and len(best_word) < 10 or\
+            len(word) == 10 and len(best_word) < 10:
+                best_word = word
+                best_score = score
 
+    return [best_word, best_score]
+        
