@@ -32,46 +32,48 @@ LETTER_POOL = {
     'Z': 1
 }
 
-LETTERS_SCORE = {
-    'A': 1, 'E': 1, 'I': 1, 'O': 1, 'U': 1, 'L': 1, 'N': 1, 'R': 1, 'S': 1, 'T': 1,
-    'D': 2, 'G': 2,
-    'B': 3, 'C': 3, 'M': 3, 'P': 3,
-    'F': 4, 'H': 4, 'V': 4, 'W': 4, 'Y': 4,
-    'K': 5,
-    'J': 8, 'X': 8,
-    'Q': 10, 'Z': 10
-}
-
-LETTERS_LIST = [
-    'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'B', 'B', 'C', 'C', 'D', 'D', 'D', 'D', 'E', 'E', 
-    'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'F', 'F', 'G', 'G', 'G', 'H', 'H', 'I', 'I', 'I', 'I', 'I',
-    'I', 'I', 'I', 'I', 'J', 'K', 'L', 'L', 'L', 'L', 'M', 'M', 'N', 'N', 'N', 'N', 'N', 'N', 'O', 'O', 'O', 'O', 
-    'O', 'O', 'O', 'O', 'P', 'P', 'Q', 'R', 'R', 'R', 'R', 'R', 'R', 'S', 'S', 'S', 'S', 'T', 'T', 'T', 'T', 'T',
-    'T', 'U', 'U', 'U', 'U', 'V', 'V', 'W', 'W', 'X', 'Y', 'Y', 'Z'
+# applied dict(sorted(LETTERS_SCORE.items())) to previous unsorted dictionary
+LETTERS_SCORE = [
+    {'A': 1, 'B': 3, 'C': 3, 'D': 2, 'E': 1, 'F': 4, 'G': 2, 'H': 4, 'I': 1, 'J': 8, 'K': 5, 'L': 1, 'M': 3, 
+    'N': 1, 'O': 1, 'P': 3, 'Q': 10, 'R': 1, 'S': 1, 'T': 1, 'U': 1, 'V': 4, 'W': 4, 'X': 8, 'Y': 4, 'Z': 10}
 ]
 
+
+def helper_letters_list(LETTER_POOL):
+    # buils a list of letters according to their amount in LETTER_POOL
+    letters_list = []
+    for key, value in LETTER_POOL.items():
+        for i in range(LETTER_POOL[key]):
+            letters_list.append(key)
+
+    return letters_list
+
+letters_list = helper_letters_list(LETTER_POOL)
+
+
 def draw_letters():
-    
     tiles = []
-    for x in range(10):
-        random_integer = random.randint(0, len(LETTERS_LIST)-1)
-        letter = LETTERS_LIST[random_integer]
-        if tiles.count(letter) == LETTER_POOL[letter]:
-            break
-        tiles.append(letter)
+
+    while len(tiles) < 10:
+        random_integer = randint(0, len(letters_list)-1)
+        letter = letters_list[random_integer]
+        if tiles.count(letter) < LETTER_POOL[letter] and len(tiles) <10:
+            tiles.append(letter)
+        else:
+            continue
+
     return tiles  
 
 def uses_available_letters(word, letter_bank):
 
-    word = word.upper()
-    word_counts = Counter(word)
-    letter_bank_counts = Counter(letter_bank)
-    
-    for letter, count in word_counts.items():
-        if letter_bank_counts[letter] < count:
+    for letter in word:
+        if letter.upper() not in letter_bank:
             return False
-    
+        elif word.count(letter.upper()) > letter_bank.count(letter):
+            return False
+        
     return True
+
 
 def score_word(word):
     score = 0
@@ -83,7 +85,7 @@ def score_word(word):
 
     return score
 
-def get_highest_word_score(word_list):
+def get_highest_word_score(word_list, debug_print = False):
     if not word_list:
         return None
     
@@ -93,6 +95,9 @@ def get_highest_word_score(word_list):
     for i in range(1, len(word_list)):
         word = word_list[i]
         score = score_word(word)
+
+        if debug_print:
+            print(f'Checking {word}, score {score}')
 
         if score > best_score:
             best_score = score
