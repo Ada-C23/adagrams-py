@@ -33,16 +33,40 @@ LETTER_POOL = {
 }
 
 # applied dict(sorted(LETTERS_SCORE.items())) to previous unsorted dictionary
-LETTERS_SCORE = [
-    {'A': 1, 'B': 3, 'C': 3, 'D': 2, 'E': 1, 'F': 4, 'G': 2, 'H': 4, 'I': 1, 'J': 8, 'K': 5, 'L': 1, 'M': 3, 
-    'N': 1, 'O': 1, 'P': 3, 'Q': 10, 'R': 1, 'S': 1, 'T': 1, 'U': 1, 'V': 4, 'W': 4, 'X': 8, 'Y': 4, 'Z': 10}
-]
+LETTERS_SCORE = {
+    'A': 1, 
+    'B': 3, 
+    'C': 3, 
+    'D': 2, 
+    'E': 1, 
+    'F': 4, 
+    'G': 2, 
+    'H': 4, 
+    'I': 1, 
+    'J': 8, 
+    'K': 5, 
+    'L': 1, 
+    'M': 3, 
+    'N': 1, 
+    'O': 1, 
+    'P': 3, 
+    'Q': 10, 
+    'R': 1, 
+    'S': 1, 
+    'T': 1, 
+    'U': 1, 
+    'V': 4, 
+    'W': 4, 
+    'X': 8, 
+    'Y': 4, 
+    'Z': 10
+}
 
 
 def helper_letters_list(LETTER_POOL):
     # buils a list of letters according to their amount in LETTER_POOL
     letters_list = []
-    for key, value in LETTER_POOL.items():
+    for key in LETTER_POOL.keys():
         for i in range(LETTER_POOL[key]):
             letters_list.append(key)
 
@@ -77,11 +101,11 @@ def uses_available_letters(word, letter_bank):
 
 def score_word(word):
     score = 0
-    word = word.upper()
 
     for letter in word:
-        score += LETTERS_SCORE[letter]
-    score += 8 if len(word) >= 7 else 0
+        score += LETTERS_SCORE[letter.upper()]
+    if len(word) >= 7:
+        score += 8
 
     return score
 
@@ -95,10 +119,6 @@ def get_highest_word_score(word_list, debug_print = False):
     for i in range(1, len(word_list)):
         word = word_list[i]
         score = score_word(word)
-
-        if debug_print:
-            print(f'Checking {word}, score {score}')
-
         if score > best_score:
             best_score = score
             best_word = word
@@ -108,5 +128,5 @@ def get_highest_word_score(word_list, debug_print = False):
                 best_word = word
                 best_score = score
 
-    return [best_word, best_score]
+    return (best_word, best_score)
         

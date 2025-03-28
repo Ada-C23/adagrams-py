@@ -3,7 +3,7 @@ def display_welcome_message():
 
 def display_drawn_letters(letters):
     print("You have drawn the letters:")
-    # print(', '.join(str(letters)))
+    print(', '.join(str(letters)))
     print(letters)
 
 def display_game_instructions():
