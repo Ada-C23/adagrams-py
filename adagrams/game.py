@@ -58,7 +58,7 @@ def score_word(word):
 }
     word = word.upper()
 
-    if word == "":
+    if not word:
         return 0
     
     # Calculate the total score by summing the values of each letter in the word
