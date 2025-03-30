@@ -95,4 +95,4 @@ def get_highest_word_score(word_list):
                 elif len(word) < len(winning_word):  
                     winning_word = word  # Choose the shortest word
 
-    return (winning_word, highest_score)
+    return winning_word, highest_score
