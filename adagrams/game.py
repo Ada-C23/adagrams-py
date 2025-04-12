@@ -56,29 +56,20 @@ def score_word(word):
     word = word.upper()
     total_points = 0
     
-    one_point = ['A', 'E', 'I', 'O', 'U', 'L', 'N', 'R', 'S', 'T']
-    two_point = ['D', 'G']
-    three_point = ['B', 'C', 'M', 'P']
-    four_point = ['F', 'H', 'V', 'W', 'Y']
-    five_point = ['K']
-    eight_point = ['J', 'X']
-    ten_point = ['Q', 'Z']
-
-    for letter in word.upper():
-        if letter in one_point:
-            total_points += 1
-        elif letter in two_point:
-            total_points += 2
-        elif letter in three_point:
-            total_points += 3
-        elif letter in four_point:
-            total_points += 4
-        elif letter in five_point:
-            total_points += 5
-        elif letter in eight_point:
-            total_points += 8
-        elif letter in ten_point:
-            total_points += 10
+    letter_scores = {
+        'A': 1, 'E': 1, 'I': 1, 'O': 1, 'U': 1,
+        'L': 1, 'N': 1, 'R': 1, 'S': 1, 'T': 1,
+        'D': 2, 'G': 2,
+        'B': 3, 'C': 3, 'M': 3, 'P': 3,
+        'F': 4, 'H': 4, 'V': 4, 'W': 4, 'Y': 4,
+        'K': 5,
+        'J': 8, 'X': 8,
+        'Q': 10, 'Z': 10
+        }
+    
+    for letter in word:
+        if letter in letter_scores:
+            total_points += letter_scores[letter]
         
     if len(word) >= 7:
         total_points += 8
