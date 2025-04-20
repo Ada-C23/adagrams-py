@@ -118,3 +118,35 @@ def test_get_highest_word_does_not_return_early_after_first_tiebreaker():
     # Assert
     assert best_word[0] == "JQ"
     assert best_word[1] == 18
+
+
+def test_check_many_ties_returns_shortest_unsorted():
+    # Arrange
+    words = ["AAAA", "DD", "F"]
+
+    # Act
+    best_word = get_highest_word_score(words)
+
+    # Assert
+    assert best_word[0] == "F"
+    assert best_word[1] == 4
+
+def test_check_many_ties_returns_shortest_unsorted_again():
+    # Arrange
+    words = ["BCD", "DDDD", "J", "FF"]
+
+    # Act
+    best_word = get_highest_word_score(words)
+
+    # Assert
+    assert best_word[0] == "J"
+    assert best_word[1] == 8
+
+def test_check_case_best_word_not_in_ties():
+    words = ["AAAAAAAAAA", "BBBBBB", "BBBBBBB", "GGGGGGG"]
+    # Act
+    best_word = get_highest_word_score(words)
+
+    # Assert
+    assert best_word[0] == "BBBBBBB"
+    assert best_word[1] == 29        
