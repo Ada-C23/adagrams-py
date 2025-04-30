@@ -32,6 +32,10 @@ LETTER_POOL = {
 }
 
 def test_draw_letters_draws_ten():
+    '''
+    tests if draw_letter() function draws 10 card
+    draw_letter() returns: a list of 10 cards
+    '''
     # Arrange/Act
     letters = draw_letters()
 
@@ -39,6 +43,9 @@ def test_draw_letters_draws_ten():
     assert len(letters) == 10
 
 def test_draw_letters_is_list_of_letter_strings():
+    '''
+    tests if draw_letter() gets all string input
+    '''
     # Arrange/Act
     letters = draw_letters()
 
@@ -50,6 +57,9 @@ def test_draw_letters_is_list_of_letter_strings():
         assert len(elem) == 1
 
 def test_letter_not_selected_too_many_times():
+    '''
+    checks if draw_letter() list items have counts less than the available num in pool
+    '''
 
     for i in range(1000):
         # Arrange/Act
@@ -67,6 +77,10 @@ def test_letter_not_selected_too_many_times():
             assert letter_freq[letter] <= LETTER_POOL[letter]
 
 def test_draw_letters_returns_different_hands():
+    '''
+    checks the two draw are not identical
+    ***Q**** what does it mean by identical
+    '''
     # Arrange/Act
     hand1 = draw_letters()
     hand2 = draw_letters()

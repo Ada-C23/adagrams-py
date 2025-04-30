@@ -11,7 +11,7 @@ def test_uses_available_letters_true_word_in_letter_bank():
     is_valid = uses_available_letters(word, letters)
 
     # Assert
-    assert is_valid == True
+    assert is_valid == True 
 
 def test_uses_available_letters_false_word_in_letter_bank():
     # Arrange
