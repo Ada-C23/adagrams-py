@@ -1,5 +1,5 @@
 # AdaGrams
-
+Programmer: Laura Castro
 ## Skills Assessed
 
 - Following directions and reading comprehension
